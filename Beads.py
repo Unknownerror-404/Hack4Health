@@ -8,7 +8,7 @@ class BrockStringApp:
         self.root.geometry("650x300")
         self.direction = direction
         self.on_complete = on_complete
-        self.total_rounds = total_rounds or random.randint(3, 20)
+        self.total_rounds = total_rounds or random.randint(3, 7)
         self.current_round = 1
         self.current_theme = "light"
 
