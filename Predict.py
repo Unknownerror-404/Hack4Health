@@ -1,3 +1,6 @@
+#pip install imutils tensorflow keras pillow opencv-python tkinterdnd2
+#pip install dlib-19.24.1-cp310-cp310-win_amd64.whl #Must be installed manually and must be run from the same directory where the .whl file is located
+
 import tkinter as tk
 from tkinter import filedialog, Label, Button, messagebox
 from PIL import Image, ImageTk
@@ -13,14 +16,14 @@ from Beads import launch_brock_string_app
 from Trace import launch_eye_tracking_app
 
 class_labels = {
-    0: "Normal",
-    1: "Esotropia",
-    2: "Exotropia",
-    3: "Hypertropia",
-    4: "Hypotropia",
+    0: "Esotropia",
+    1: "Exotropia",
+    2: "Hypertropia",
+    3: "Hypotropia",
+    4: "Normal",
 }
 
-model = load_model("./eye_classifier_model_87%.keras")
+model = load_model("./cnn_eye_model.keras")
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
@@ -85,7 +88,7 @@ def extract_eye_region(img_path):
     if eye_crop.size == 0:
         return None
 
-    return cv2.resize(eye_crop, (300, 75))
+    return cv2.resize(eye_crop, (224, 224))
 
 def predict_eye_class(img_path):
     try:
